@@ -1,0 +1,20 @@
+一、执行 ansible-playbook 04.kube-master.yml 时：
+
+出现以下错误
+
+TASK [kube-master : 创建 kubernetes 证书签名请求] *******************************************************************************
+fatal: [192.168.33.10]: FAILED! => {"changed": false, "msg": "AnsibleError: An unhandled exception occurred while templating '{{ SERVICE_CIDR | ipaddr('net') | ipaddr(1) | ipaddr('address') }}'. Error was a <class 'ansible.errors.AnsibleFilterError'>, original message: The ipaddr filter requires python's netaddr be installed on the ansible controller"}
+fatal: [192.168.33.11]: FAILED! => {"changed": false, "msg": "AnsibleError: An unhandled exception occurred while templating '{{ SERVICE_CIDR | ipaddr('net') | ipaddr(1) | ipaddr('address') }}'. Error was a <class 'ansible.errors.AnsibleFilterError'>, original message: The ipaddr filter requires python's netaddr be installed on the ansible controller"}
+
+PLAY RECAP **************************************************************************************************************
+192.168.33.10              : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+192.168.33.11              : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0 
+
+
+
+
+解决办法：
+controller01 端安装
+
+sudo yum install python-ipaddr
+pip install netaddr
